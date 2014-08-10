@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<project name="InterfaceVectorExtension" default="main" basedir="..">
+	<!--location of property file -->
+	<property file="${basedir}/build/build.properties" description="properties" />
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+    <property name="DEPLOY.dir" value="${basedir}/bin"/>
+    <target name="main" depends="clean, compile"/>
+    <target name="clean">
+        <delete dir="${DEPLOY.dir}"/>
+        <mkdir dir="${DEPLOY.dir}"/>
+    </target>
+    <target name="compile">
+		<compc output="${DEPLOY.dir}/InterfaceVectorExtension.swc" failonerror="true" maxmemory="1024m">
+			<source-path path-element="${basedir}/src"/>
+			<include-sources dir="${basedir}/src" includes="*"/>
+			<library-path file="${ROBOTLEGS_LIBRARY}" append="false"/>
+			<keep-as3-metadata name="Inject"/>
+			<keep-as3-metadata name="PostConstruct"/>
+		</compc>
+	</target>
+</project>
