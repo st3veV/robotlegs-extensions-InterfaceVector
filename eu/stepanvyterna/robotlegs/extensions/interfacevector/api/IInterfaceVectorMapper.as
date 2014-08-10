@@ -33,6 +33,10 @@ package eu.stepanvyterna.robotlegs.extensions.interfacevector.api {
 		
 		function clear():void;
 		
+		function addInterfaceToBlacklist(interfaceClass:Class):void;
+		
+		function removeInterfaceFromBlacklist(interfaceClass:Class):void;
+		
 	}
 
 }

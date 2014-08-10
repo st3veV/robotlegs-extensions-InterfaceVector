@@ -21,14 +21,19 @@
  * 
  */
  
-package eu.stepanvyterna.robotlegs.extensions.interfacevector {
+package eu.stepanvyterna.robotlegs.extensions.interfacevector
+{
 	
 	import eu.stepanvyterna.robotlegs.extensions.interfacevector.api.IInterfaceVectorMapper;
 	import eu.stepanvyterna.robotlegs.extensions.interfacevector.impl.InterfaceVectorMapper;
 	import org.swiftsuspenders.InjectionEvent;
 	import org.swiftsuspenders.mapping.MappingEvent;
+	import robotlegs.bender.extensions.commandCenter.api.ICommand;
+	import robotlegs.bender.framework.api.IConfig;
 	import robotlegs.bender.framework.api.IContext;
 	import robotlegs.bender.framework.api.IExtension;
+	import robotlegs.bender.framework.api.IGuard;
+	import robotlegs.bender.framework.api.IHook;
 	import robotlegs.bender.framework.api.IInjector;
 	
 	
@@ -45,6 +50,16 @@ package eu.stepanvyterna.robotlegs.extensions.interfacevector {
 			
 			registry = new InterfaceVectorMapper(injector);
 			injector.map(IInterfaceVectorMapper).toValue(registry);
+			
+			initializeRegistryBlacklist();
+		}
+		
+		private function initializeRegistryBlacklist():void 
+		{
+			registry.addInterfaceToBlacklist(ICommand);
+			registry.addInterfaceToBlacklist(IGuard);
+			registry.addInterfaceToBlacklist(IHook);
+			registry.addInterfaceToBlacklist(IConfig);
 		}
 		
 		private function startProcessing():void 
